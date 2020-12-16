@@ -4,29 +4,39 @@
     <meta charset="UTF-8">
     <title>TriD's Paint Board</title>
     <style>
-        #paintToolFrame{
+        #paintToolFrame {
             position: relative;
             margin: 0 auto;
             width: 800px;
             height: 650px;
             /*background-color: deepskyblue;*/
         }
-        #buttonArea{
+
+        #buttonArea {
             position: relative;
             top: 0;
             height: 50px;
             /*background-color: cornflowerblue;*/
         }
-        #refreshCanvasBtn{
+
+        #buttonArea button {
             position: absolute;
             width: 100px;
             height: 50px;
             margin: auto;
             top: 0;
             bottom: 0;
+        }
+
+        #refreshCanvasBtn {
             right: 0;
         }
-        canvas{
+
+        #drawRectsBtn {
+            left: 0;
+        }
+
+        #paintArea {
             position: absolute;
             bottom: 0;
             background-color: whitesmoke;
@@ -34,16 +44,35 @@
     </style>
 </head>
 <body>
-    <div id="paintToolFrame">
-        <div id="buttonArea">
-            <button id="refreshCanvasBtn" onclick="refreshCanvas()">refresh</button>
-        </div>
-        <canvas id="paintArea" width="800px" height="600px"></canvas>
+<div id="paintToolFrame">
+    <div id="buttonArea">
+        <button id="refreshCanvasBtn" onclick="refreshCanvas()">refresh</button>
+        <button id="drawRectsBtn" onclick="drawRects()">draw rect</button>
     </div>
-    <script>
-        function refreshCanvas(){
+    <canvas id="paintArea" width="800px" height="600px"></canvas>
+</div>
+<script>
+    let paintArea = document.getElementById("paintArea");
+    if (paintArea.getContext) {
+        ctx = paintArea.getContext('2d');
+    }
 
-        }
-    </script>
+    //画矩形
+    function drawRects() {
+        ctx.strokeStyle = "#66ccff";
+        let randX = Math.floor(Math.random() * 800);
+        let randY = Math.floor(Math.random() * 600);
+        console.log("X: " + randX);
+        console.log("Y: " + randY);
+        ctx.strokeRect(randX, randY, 50, 50);
+    }
+
+    //用画布底色填充画布 实现清空的效果
+    function refreshCanvas() {
+        ctx.fillStyle = window.getComputedStyle(paintArea, null).backgroundColor;
+        ctx.strokeStyle = "#66ccff";
+        ctx.fillRect(0, 0, paintArea.width, paintArea.height);
+    }
+</script>
 </body>
 </html>
