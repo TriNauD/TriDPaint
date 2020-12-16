@@ -59,21 +59,15 @@
     }
 
     window.onload = function () {
-        console.log("onload");
         refreshBtn.onclick = function () {
-            console.log("refresh button clicked");
             ctx.clearRect(0, 0, paintArea.width, paintArea.height);
         }
         drawRectsBtn.onclick = function () {
-            console.log("draw rects button clicked");
             let randX = Math.floor(Math.random() * 800);
             let randY = Math.floor(Math.random() * 600);
-            console.log("X: " + randX);
-            console.log("Y: " + randY);
             ctx.strokeRect(randX, randY, 50, 50);
         }
         paintArea.onmousedown = function (event) {
-            console.log("canvas mouse down");
             ctx.beginPath();
             ctx.moveTo(event.clientX - frame.offsetLeft, event.clientY - paintArea.offsetTop);
             console.log(event.clientX - frame.offsetLeft, event.clientY - paintArea.offsetTop);
@@ -86,7 +80,6 @@
             }
         }
     }
-
 </script>
 </body>
 </html>
