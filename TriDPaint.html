@@ -31,7 +31,7 @@
         }
 
         #drawRectsBtn {
-            left: 0;
+            right: 120px;
         }
 
         .color {
@@ -42,14 +42,25 @@
             height: 50px;
         }
 
+        #currentColor {
+            color: white;
+            background-color: black;
+            left: 0;
+        }
+
         #color1 {
             background-color: firebrick;
-            left: 100px;
+            left: 120px;
         }
 
         #color2 {
             background-color: dodgerblue;
-            left: 200px;
+            left: 240px;
+        }
+
+        #color3 {
+            background-color: black;
+            left: 360px;
         }
 
         #paintArea {
@@ -65,8 +76,10 @@
 <div id="paintToolFrame">
     <div id="buttonArea">
         <button id="refreshCanvasBtn">refresh</button>
+        <button id="currentColor" class="color">current color</button>
         <button id="color1" class="color" onclick="selectColor(this)"></button>
         <button id="color2" class="color" onclick="selectColor(this)"></button>
+        <button id="color3" class="color" onclick="selectColor(this)"></button>
         <button id="drawRectsBtn">draw rect</button>
     </div>
     <canvas id="paintArea" width="800px" height="600px"></canvas>
@@ -76,6 +89,7 @@
     let paintArea = document.getElementById("paintArea");
     let refreshBtn = document.getElementById("refreshCanvasBtn");
     let drawRectsBtn = document.getElementById("drawRectsBtn");
+    let currentColor = document.getElementById("currentColor");
     if (paintArea.getContext) {
         ctx = paintArea.getContext('2d');
     }
@@ -92,7 +106,6 @@
         paintArea.onmousedown = function (event) {
             ctx.beginPath();
             ctx.moveTo(event.clientX - frame.offsetLeft, event.clientY - paintArea.offsetTop);
-            console.log(event.clientX - frame.offsetLeft, event.clientY - paintArea.offsetTop);
             document.onmousemove = function (event) {
                 ctx.lineTo(event.clientX - frame.offsetLeft, event.clientY - paintArea.offsetTop);
                 ctx.stroke();
@@ -104,7 +117,9 @@
     }
 
     function selectColor(button) {
-        ctx.strokeStyle = window.getComputedStyle(button, null).backgroundColor;
+        let selectedColor = window.getComputedStyle(button, null).backgroundColor;
+        ctx.strokeStyle = selectedColor;
+        currentColor.style.backgroundColor = selectedColor;
     }
 </script>
 </body>
