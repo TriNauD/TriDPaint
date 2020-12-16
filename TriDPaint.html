@@ -34,18 +34,39 @@
             left: 0;
         }
 
+        .color {
+            position: absolute;
+            border: none;
+            outline: none;
+            width: 50px;
+            height: 50px;
+        }
+
+        #color1 {
+            background-color: firebrick;
+            left: 100px;
+        }
+
+        #color2 {
+            background-color: dodgerblue;
+            left: 200px;
+        }
         #paintArea {
             position: absolute;
             bottom: 0;
             background-color: whitesmoke;
         }
+
+
     </style>
 </head>
 <body>
 <div id="paintToolFrame">
     <div id="buttonArea">
         <button id="refreshCanvasBtn">refresh</button>
-        <button id="drawRectsBtn" onclick="drawRects()">draw rect</button>
+        <button id="color1" class="color" onclick="selectColor(this)"></button>
+        <button id="color2" class="color" onclick="selectColor(this)"></button>
+        <button id="drawRectsBtn">draw rect</button>
     </div>
     <canvas id="paintArea" width="800px" height="600px"></canvas>
 </div>
@@ -79,6 +100,9 @@
                 document.onmousedown = document.onmousemove = null;
             }
         }
+    }
+    function selectColor(button) {
+        ctx.strokeStyle = window.getComputedStyle(button,null).backgroundColor;
     }
 </script>
 </body>
