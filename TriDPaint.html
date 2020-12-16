@@ -51,6 +51,7 @@
             background-color: dodgerblue;
             left: 200px;
         }
+
         #paintArea {
             position: absolute;
             bottom: 0;
@@ -101,8 +102,9 @@
             }
         }
     }
+
     function selectColor(button) {
-        ctx.strokeStyle = window.getComputedStyle(button,null).backgroundColor;
+        ctx.strokeStyle = window.getComputedStyle(button, null).backgroundColor;
     }
 </script>
 </body>
