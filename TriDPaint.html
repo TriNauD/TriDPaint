@@ -44,40 +44,48 @@
 <body>
 <div id="paintToolFrame">
     <div id="buttonArea">
-        <button id="refreshCanvasBtn" onclick="refreshCanvas()">refresh</button>
+        <button id="refreshCanvasBtn">refresh</button>
         <button id="drawRectsBtn" onclick="drawRects()">draw rect</button>
     </div>
     <canvas id="paintArea" width="800px" height="600px"></canvas>
 </div>
 <script>
     let paintArea = document.getElementById("paintArea");
+    let refreshBtn = document.getElementById("refreshCanvasBtn");
+    let drawRectsBtn = document.getElementById("drawRectsBtn");
     if (paintArea.getContext) {
         ctx = paintArea.getContext('2d');
     }
 
     window.onload = function () {
-        paintArea.onmousedown = function (ev) {
-
+        console.log("onload");
+        refreshBtn.onclick = function () {
+            console.log("refresh button clicked");
+            ctx.clearRect(0, 0, paintArea.width, paintArea.height);
+        }
+        drawRectsBtn.onclick = function () {
+            console.log("draw rects button clicked");
+            let randX = Math.floor(Math.random() * 800);
+            let randY = Math.floor(Math.random() * 600);
+            console.log("X: " + randX);
+            console.log("Y: " + randY);
+            ctx.strokeRect(randX, randY, 50, 50);
+        }
+        paintArea.onmousedown = function (event) {
+            console.log("canvas mouse down");
+            ctx.beginPath();
+            ctx.moveTo(event.clientX - paintArea.offsetLeft, event.clientY - paintArea.offsetTop);
+            console.log(event.clientX - paintArea.offsetLeft, event.clientY - paintArea.offsetTop);
+            document.onmousemove = function (event) {
+                ctx.lineTo(event.clientX - paintArea.offsetLeft, event.clientY - paintArea.offsetTop);
+                ctx.stroke();
+            }
+            document.onmouseup = function () {
+                document.onmousedown = document.onmousemove = null;
+            }
         }
     }
 
-
-    //画矩形 位置随机
-    function drawRects() {
-        ctx.strokeStyle = "#66ccff";
-        let randX = Math.floor(Math.random() * 800);
-        let randY = Math.floor(Math.random() * 600);
-        console.log("X: " + randX);
-        console.log("Y: " + randY);
-        ctx.strokeRect(randX, randY, 50, 50);
-    }
-
-    //用画布底色填充画布 实现清空的效果
-    function refreshCanvas() {
-        ctx.fillStyle = window.getComputedStyle(paintArea, null).backgroundColor;
-        ctx.strokeStyle = "#66ccff";
-        ctx.fillRect(0, 0, paintArea.width, paintArea.height);
-    }
 </script>
 </body>
 </html>
