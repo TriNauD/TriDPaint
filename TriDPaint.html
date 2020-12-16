@@ -9,14 +9,12 @@
             margin: 0 auto;
             width: 800px;
             height: 650px;
-            /*background-color: deepskyblue;*/
         }
 
         #buttonArea {
             position: relative;
             top: 0;
             height: 50px;
-            /*background-color: cornflowerblue;*/
         }
 
         #buttonArea button {
@@ -57,7 +55,14 @@
         ctx = paintArea.getContext('2d');
     }
 
-    //画矩形
+    window.onload = function () {
+        paintArea.onmousedown = function (ev) {
+
+        }
+    }
+
+
+    //画矩形 位置随机
     function drawRects() {
         ctx.strokeStyle = "#66ccff";
         let randX = Math.floor(Math.random() * 800);
