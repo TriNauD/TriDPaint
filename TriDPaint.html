@@ -4,11 +4,46 @@
     <meta charset="UTF-8">
     <title>TriD's Paint Board</title>
     <style>
-        
+        #paintToolFrame{
+            position: relative;
+            margin: 0 auto;
+            width: 800px;
+            height: 650px;
+            /*background-color: deepskyblue;*/
+        }
+        #buttonArea{
+            position: relative;
+            top: 0;
+            height: 50px;
+            /*background-color: cornflowerblue;*/
+        }
+        #refreshCanvasBtn{
+            position: absolute;
+            width: 100px;
+            height: 50px;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            right: 0;
+        }
+        canvas{
+            position: absolute;
+            bottom: 0;
+            background-color: whitesmoke;
+        }
     </style>
 </head>
 <body>
-    <div></div>
-    <script></script>
+    <div id="paintToolFrame">
+        <div id="buttonArea">
+            <button id="refreshCanvasBtn" onclick="refreshCanvas()">refresh</button>
+        </div>
+        <canvas id="paintArea" width="800px" height="600px"></canvas>
+    </div>
+    <script>
+        function refreshCanvas(){
+
+        }
+    </script>
 </body>
 </html>
