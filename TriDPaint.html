@@ -50,6 +50,7 @@
     <canvas id="paintArea" width="800px" height="600px"></canvas>
 </div>
 <script>
+    let frame = document.getElementById("paintToolFrame");
     let paintArea = document.getElementById("paintArea");
     let refreshBtn = document.getElementById("refreshCanvasBtn");
     let drawRectsBtn = document.getElementById("drawRectsBtn");
@@ -74,10 +75,10 @@
         paintArea.onmousedown = function (event) {
             console.log("canvas mouse down");
             ctx.beginPath();
-            ctx.moveTo(event.clientX - paintArea.offsetLeft, event.clientY - paintArea.offsetTop);
-            console.log(event.clientX - paintArea.offsetLeft, event.clientY - paintArea.offsetTop);
+            ctx.moveTo(event.clientX - frame.offsetLeft, event.clientY - paintArea.offsetTop);
+            console.log(event.clientX - frame.offsetLeft, event.clientY - paintArea.offsetTop);
             document.onmousemove = function (event) {
-                ctx.lineTo(event.clientX - paintArea.offsetLeft, event.clientY - paintArea.offsetTop);
+                ctx.lineTo(event.clientX - frame.offsetLeft, event.clientY - paintArea.offsetTop);
                 ctx.stroke();
             }
             document.onmouseup = function () {
