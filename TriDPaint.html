@@ -73,54 +73,54 @@
     </style>
 </head>
 <body>
-<div id="paintToolFrame">
-    <div id="buttonArea">
-        <button id="refreshCanvasBtn">refresh</button>
-        <button id="currentColor" class="color">current color</button>
-        <button id="color1" class="color" onclick="selectColor(this)"></button>
-        <button id="color2" class="color" onclick="selectColor(this)"></button>
-        <button id="color3" class="color" onclick="selectColor(this)"></button>
-        <button id="drawRectsBtn">draw rect</button>
+    <div id="paintToolFrame">
+        <div id="buttonArea">
+            <button id="refreshCanvasBtn">refresh</button>
+            <button id="currentColor" class="color">current color</button>
+            <button id="color1" class="color" onclick="selectColor(this)"></button>
+            <button id="color2" class="color" onclick="selectColor(this)"></button>
+            <button id="color3" class="color" onclick="selectColor(this)"></button>
+            <button id="drawRectsBtn">draw rect</button>
+        </div>
+        <canvas id="paintArea" width="800px" height="600px"></canvas>
     </div>
-    <canvas id="paintArea" width="800px" height="600px"></canvas>
-</div>
-<script>
-    let frame = document.getElementById("paintToolFrame");
-    let paintArea = document.getElementById("paintArea");
-    let refreshBtn = document.getElementById("refreshCanvasBtn");
-    let drawRectsBtn = document.getElementById("drawRectsBtn");
-    let currentColor = document.getElementById("currentColor");
-    if (paintArea.getContext) {
-        ctx = paintArea.getContext('2d');
-    }
+    <script>
+        let frame = document.getElementById("paintToolFrame");
+        let paintArea = document.getElementById("paintArea");
+        let refreshBtn = document.getElementById("refreshCanvasBtn");
+        let drawRectsBtn = document.getElementById("drawRectsBtn");
+        let currentColor = document.getElementById("currentColor");
+        if (paintArea.getContext) {
+            ctx = paintArea.getContext('2d');
+        }
 
-    window.onload = function () {
-        refreshBtn.onclick = function () {
-            ctx.clearRect(0, 0, paintArea.width, paintArea.height);
-        }
-        drawRectsBtn.onclick = function () {
-            let randX = Math.floor(Math.random() * 800);
-            let randY = Math.floor(Math.random() * 600);
-            ctx.strokeRect(randX, randY, 50, 50);
-        }
-        paintArea.onmousedown = function (event) {
-            ctx.beginPath();
-            ctx.moveTo(event.clientX - frame.offsetLeft, event.clientY - paintArea.offsetTop);
-            document.onmousemove = function (event) {
-                ctx.lineTo(event.clientX - frame.offsetLeft, event.clientY - paintArea.offsetTop);
-                ctx.stroke();
+        window.onload = function () {
+            refreshBtn.onclick = function () {
+                ctx.clearRect(0, 0, paintArea.width, paintArea.height);
             }
-            document.onmouseup = function () {
-                document.onmousedown = document.onmousemove = null;
+            drawRectsBtn.onclick = function () {
+                let randX = Math.floor(Math.random() * 800);
+                let randY = Math.floor(Math.random() * 600);
+                ctx.strokeRect(randX, randY, 50, 50);
+            }
+            paintArea.onmousedown = function (event) {
+                ctx.beginPath();
+                ctx.moveTo(event.clientX - frame.offsetLeft, event.clientY - paintArea.offsetTop);
+                document.onmousemove = function (event) {
+                    ctx.lineTo(event.clientX - frame.offsetLeft, event.clientY - paintArea.offsetTop);
+                    ctx.stroke();
+                }
+                document.onmouseup = function () {
+                    document.onmousedown = document.onmousemove = null;
+                }
             }
         }
-    }
 
-    function selectColor(button) {
-        let selectedColor = window.getComputedStyle(button, null).backgroundColor;
-        ctx.strokeStyle = selectedColor;
-        currentColor.style.backgroundColor = selectedColor;
-    }
-</script>
+        function selectColor(button) {
+            let selectedColor = window.getComputedStyle(button, null).backgroundColor;
+            ctx.strokeStyle = selectedColor;
+            currentColor.style.backgroundColor = selectedColor;
+        }
+    </script>
 </body>
 </html>
